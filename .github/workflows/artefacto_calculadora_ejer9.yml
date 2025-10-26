@@ -1,0 +1,37 @@
+name: Java CI con tests y artefacto
+
+on: [push, pull_request]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: clonamos el código
+        uses: actions/checkout@v5
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Compilar código Java
+        run: javac -d out src/*.java
+
+      - name: Ejecutar tests (con assert)
+        run: java -cp out CalculadoraTest
+
+      - name: Crear archivo JAR ejecutable
+        run: |
+          cd out
+          jar cfe Calculadora.jar Main *.class
+
+      - name: Probar ejecución del JAR
+        run: java -jar out/Calculadora.jar
+
+      - name: Guardar el artefacto generado
+        uses: actions/upload-artifact@v5
+        with:
+          name: calculadora-jar
+          path: out/Calculadora.jar
