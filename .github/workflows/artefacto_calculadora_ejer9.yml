@@ -16,14 +16,15 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      # compila los java y los deja en out
       - name: Compilar código Java
         run: javac -d out src/*.java
 
-      
+      # indica la ruta (classspath) dpmnde están los archivos a ejecutar
       - name: Ejecutar tests con asserts
         run: java -cp out CalculadoraTest
 
-      
+      # cfe: crea nuevo archivo jar, f indica el nombre que tendrá el archivo que crea, e: entry point, especifica cual es la clase principal
       - name: Crear archivo JAR ejecutable
         run: |
           cd out
@@ -38,16 +39,3 @@ jobs:
           name: calculadora-jar
           path: out/Calculadora.jar
           
-  # compila los java y los deja en out
-  #- name: Compilar código Java
-  #   run: javac -d out src/*.java
-
-      #indica la ruta (classspath) dpmnde están los archivos a ejecutar
-  #   - name: Ejecutar tests con asserts
-  #      run: java -cp out CalculadoraTest
-
-      #cfe: crea nuevo archivo jar, f indica el nombre que tendrá el archivo que crea, e: entry point, especifica cual es la clase principal
-   #   - name: Crear archivo JAR ejecutable
-   #     run: |
-   #       cd out
-   #      jar cfe Calculadora.jar Main *.class
