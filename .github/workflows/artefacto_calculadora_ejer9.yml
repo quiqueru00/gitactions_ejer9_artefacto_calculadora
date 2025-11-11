@@ -19,7 +19,7 @@ jobs:
       - name: Compilar código Java
         run: javac -d out src/*.java
 
-      - name: Ejecutar tests (con assert)
+      - name: Ejecutar tests con asserts
         run: java -cp out CalculadoraTest
 
       - name: Crear archivo JAR ejecutable
