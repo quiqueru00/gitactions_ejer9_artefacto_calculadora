@@ -20,9 +20,9 @@ jobs:
       - name: Compilar código Java
         run: javac -d out src/*.java
 
-      # indica la ruta (classspath) dpmnde están los archivos a ejecutar
+      # indica la ruta (classspath) dpmnde están los archivos a ejecutar. El -ea habilita las aserciones *(por defecto java ejecurta sin aserciones
       - name: Ejecutar tests con asserts
-        run: java -cp out CalculadoraTest
+        run: java -ea -cp out CalculadoraTest
 
       # cfe: crea nuevo archivo jar, f indica el nombre que tendrá el archivo que crea, e: entry point, especifica cual es la clase principal
       - name: Crear archivo JAR ejecutable
